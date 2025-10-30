@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>Coches</h1>
+<a href="{{ path('coche_new') }}">Añadir nuevo coche</a>
+<table>
+    <tr>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Marca</th>
+    </tr>
+    {% for coche in coches %}
+        <tr>
+            <td>{{ coche.modelo }}</td>
+            <td>{{ coche.anio }}</td>
+            <td>{{ coche.marca.nombre }}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="3">No hay coches registrados.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Marcas</h1>
+<a href="{{ path('marca_new') }}">Añadir nueva marca</a>
+<ul>
+    {% for marca in marcas %}
+        <li>{{ marca.nombre }} ({{ marca.coches|length }} coches)</li>
+    {% else %}
+        <li>No hay marcas registradas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
