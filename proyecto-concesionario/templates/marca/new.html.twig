@@ -1,8 +1,19 @@
 {% extends 'base.html.twig' %}
+{% block title %}Nueva Marca{% endblock %}
 {% block body %}
-<h1>Nueva Marca</h1>
-{{ form_start(form) }}
-{{ form_widget(form) }}
-<button class="btn btn-primary">Guardar</button>
-{{ form_end(form) }}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="mb-4">Registrar Nueva Marca</h1>
+
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.nombre, 'Nombre de la marca', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nombre) }}
+        </div>
+        <button class="btn btn-success">Guardar</button>
+        <a href="{{ path('marca_index') }}" class="btn btn-secondary">Volver</a>
+        {{ form_end(form) }}
+    </div>
+</div>
 {% endblock %}

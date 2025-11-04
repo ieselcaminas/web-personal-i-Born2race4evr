@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Coche;
 use App\Form\CocheType;
 use App\Repository\CocheRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/coche')]
 class CocheController extends AbstractController
@@ -22,14 +23,17 @@ class CocheController extends AbstractController
     }
 
     #[Route('/new', name: 'coche_new')]
-    public function new(Request $request, CocheRepository $cocheRepository): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $coche = new Coche();
         $form = $this->createForm(CocheType::class, $coche);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cocheRepository->save($coche, true);
+            $coche = $form->getData();
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($coche);
+            $entityManager->flush();
             return $this->redirectToRoute('coche_index');
         }
 

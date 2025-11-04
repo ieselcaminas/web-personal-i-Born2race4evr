@@ -1,21 +1,33 @@
 {% extends 'base.html.twig' %}
+{% block title %}Listado de Coches{% endblock %}
 {% block body %}
-<h1>Coches</h1>
-<a href="{{ path('coche_new') }}">Añadir nuevo coche</a>
-<table>
-    <tr>
-        <th>Modelo</th>
-        <th>Año</th>
-        <th>Marca</th>
-    </tr>
-    {% for coche in coches %}
-        <tr>
-            <td>{{ coche.modelo }}</td>
-            <td>{{ coche.anio }}</td>
-            <td>{{ coche.marca.nombre }}</td>
-        </tr>
-    {% else %}
-        <tr><td colspan="3">No hay coches registrados.</td></tr>
-    {% endfor %}
-</table>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Listado de Coches</h1>
+    <a href="{{ path('coche_new') }}" class="btn btn-primary">Nuevo Coche</a>
+</div>
+
+{% if coches %}
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Modelo</th>
+                <th>Año</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for coche in coches %}
+                <tr>
+                    <td>{{ coche.id }}</td>
+                    <td>{{ coche.modelo }}</td>
+                    <td>{{ coche.anio }}</td>
+                    <td>{{ coche.marca.nombre }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-warning">No hay coches registrados todavía.</div>
+{% endif %}
 {% endblock %}

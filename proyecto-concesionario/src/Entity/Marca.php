@@ -26,12 +26,25 @@ class Marca
         $this->coches = new ArrayCollection();
     }
 
-    public function getId(): ?int { return $this->id; }
-    public function getNombre(): ?string { return $this->nombre; }
-    public function setNombre(string $nombre): static { $this->nombre = $nombre; return $this; }
+    public function getId(): ?int 
+    { 
+        return $this->id; 
+    }
+    
+    public function getNombre(): ?string 
+    { 
+        return $this->nombre; 
+    }
 
-    /** @return Collection<int, Coche> */
-    public function getCoches(): Collection { return $this->coches; }
+    public function setNombre(string $nombre): static 
+    { 
+        $this->nombre = $nombre; return $this; 
+    }
+
+    public function getCoches(): Collection 
+    { 
+        return $this->coches; 
+    }
 
     public function addCoche(Coche $coche): static {
         if (!$this->coches->contains($coche)) {

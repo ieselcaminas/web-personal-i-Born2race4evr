@@ -27,6 +27,8 @@ class CocheType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Coche::class]);
+        $resolver->setDefaults([
+            'data_class' => Coche::class
+        ]);
     }
 }

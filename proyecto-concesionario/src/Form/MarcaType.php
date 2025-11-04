@@ -12,11 +12,16 @@ class MarcaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('nombre', TextType::class, ['label' => 'Nombre de la marca']);
+        $builder
+        ->add('nombre', TextType::class, [
+            'label' => 'Nombre de la marca'
+        ]);
     }
-
+ 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Marca::class]);
+        $resolver->setDefaults([
+            'data_class' => Marca::class
+        ]);
     }
 }

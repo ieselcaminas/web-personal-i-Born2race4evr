@@ -23,13 +23,38 @@ class Coche
     #[ORM\JoinColumn(nullable: false)]
     private ?Marca $marca = null;
 
-    public function getId(): ?int { return $this->id; }
-    public function getModelo(): ?string { return $this->modelo; }
-    public function setModelo(string $modelo): static { $this->modelo = $modelo; return $this; }
+    public function getId(): ?int 
+    { 
+        return $this->id; 
+    }
 
-    public function getAnio(): ?int { return $this->anio; }
-    public function setAnio(int $anio): static { $this->anio = $anio; return $this; }
+    public function getModelo(): ?string 
+    { 
+        return $this->modelo; 
+    }
 
-    public function getMarca(): ?Marca { return $this->marca; }
-    public function setMarca(?Marca $marca): static { $this->marca = $marca; return $this; }
+    public function setModelo(string $modelo): static 
+    { 
+        $this->modelo = $modelo; return $this; 
+    }
+
+    public function getAnio(): ?int 
+    { 
+        return $this->anio; 
+    }
+    
+    public function setAnio(int $anio): static 
+    { 
+        $this->anio = $anio; return $this; 
+    }
+
+    public function getMarca(): ?Marca 
+    { 
+        return $this->marca; 
+    }
+
+    public function setMarca(?Marca $marca): static 
+    { 
+        $this->marca = $marca; return $this; 
+    }
 }

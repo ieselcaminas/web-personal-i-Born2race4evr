@@ -1,13 +1,31 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Listado de Marcas{% endblock %}
 {% block body %}
-<h1>Marcas</h1>
-<a href="{{ path('marca_new') }}">Añadir nueva marca</a>
-<ul>
-    {% for marca in marcas %}
-        <li>{{ marca.nombre }} ({{ marca.coches|length }} coches)</li>
-    {% else %}
-        <li>No hay marcas registradas.</li>
-    {% endfor %}
-</ul>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Listado de Marcas</h1>
+    <a href="{{ path('marca_new') }}" class="btn btn-primary">Nueva Marca</a>
+</div>
+
+{% if marcas %}
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Nº de Coches</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for marca in marcas %}
+                <tr>
+                    <td>{{ marca.id }}</td>
+                    <td>{{ marca.nombre }}</td>
+                    <td>{{ marca.coches|length }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-warning">No hay marcas registradas todavía.</div>
+{% endif %}
 {% endblock %}
