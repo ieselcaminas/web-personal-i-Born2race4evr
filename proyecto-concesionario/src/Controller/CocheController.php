@@ -41,4 +41,21 @@ class CocheController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    #[Route('/{id}', name: 'coche_delete', methods: ['POST'])]
+    public function delete(ManagerRegistry $doctrine, $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $repositorio = $doctrine->getRepository(Coche::class);
+        $coche = $repositorio->find($id);
+
+        if ($coche) {
+            try {
+                $entityManager->remove($coche);
+                $entityManager->flush();
+                $this->addFlash('success', 'Coche eliminado correctamente.');            } catch (\Exception $e) {
+            }
+        }
+        return $this->redirectToRoute('coche_index');
+    }
 }

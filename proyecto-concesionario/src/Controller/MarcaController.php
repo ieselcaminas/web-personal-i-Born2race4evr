@@ -14,14 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/marca')]
 class MarcaController extends AbstractController
 {
-    #[Route('/', name: 'marca_index')]
-    public function index(MarcaRepository $marcaRepository): Response
-    {
-        return $this->render('marca/index.html.twig', [
-            'marcas' => $marcaRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'marca_new')]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
