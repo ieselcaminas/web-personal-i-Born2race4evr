@@ -41,7 +41,28 @@ class CocheController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
+    #[Route('/{id}/edit', name: 'coche_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Coche $coche, ManagerRegistry $doctrine): Response
+    {
+        $form = $this->createForm(CocheType::class, $coche);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Coche actualizado correctamente.');
+
+            return $this->redirectToRoute('coche_index');
+        }
+
+        return $this->render('coche/edit.html.twig', [
+            'form' => $form->createView(),
+            'coche' => $coche,
+        ]);
+    }
+
     #[Route('/{id}', name: 'coche_delete', methods: ['POST'])]
     public function delete(ManagerRegistry $doctrine, $id): Response
     {
@@ -53,7 +74,8 @@ class CocheController extends AbstractController
             try {
                 $entityManager->remove($coche);
                 $entityManager->flush();
-                $this->addFlash('success', 'Coche eliminado correctamente.');            } catch (\Exception $e) {
+                $this->addFlash('success', 'Coche eliminado correctamente.');
+            } catch (\Exception $e) {
             }
         }
         return $this->redirectToRoute('coche_index');

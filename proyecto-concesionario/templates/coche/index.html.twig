@@ -7,8 +7,8 @@
 </div>
 
 {% if coches %}
-    <table class="table table-hover table-bordered shadow-sm">
-        <thead class="table-dark">
+    <table class="table table-hover table-bordered table-themed shadow-sm">
+        <thead class="">
             <tr>
                 <th>ID</th>
                 <th>Modelo</th>
@@ -25,6 +25,11 @@
                     <td>{{ coche.anio }}</td>
                     <td>{{ coche.marca.nombre }}</td>
                     <td class="text-center">
+                            <a href="{{ path('coche_edit', {id: coche.id}) }}" 
+                                class="btn btn-outline-warning btn-sm me-1" 
+                                title="Editar">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
                         <form method="post" action="{{ path('coche_delete', {id: coche.id}) }}" class="d-inline" onsubmit="return confirm('¿Seguro que deseas borrar este coche?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ coche.id) }}">
                             <button class="btn btn-outline-danger btn-sm" title="Eliminar">

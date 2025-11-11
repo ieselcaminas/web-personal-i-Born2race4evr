@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}Editar Coche{% endblock %}
+
+{% block body %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="mb-4">Editar Coche</h1>
+
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.modelo, 'Modelo', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.modelo, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.modelo) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.anio, 'Año', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.anio, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.anio) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.marca, 'Marca', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.marca, {'attr': {'class': 'form-select'}}) }}
+            {{ form_errors(form.marca) }}
+        </div>
+
+        <button class="btn btn-warning">Guardar Cambios</button>
+        <a href="{{ path('coche_index') }}" class="btn btn-secondary">Volver</a>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

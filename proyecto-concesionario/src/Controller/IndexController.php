@@ -2,19 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\MarcaRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class IndexController extends AbstractController
 {
-    #[Route('/', name: 'marca_index')]
-    public function index(MarcaRepository $marcaRepository): Response
+    #[Route('/', name: 'home')]
+    public function index(): Response
     {
-        return $this->render('marca/index.html.twig', [
-            'marcas' => $marcaRepository->findAll(),
-        ]);
+        return $this->render('home/index.html.twig');
     }
-
 }
