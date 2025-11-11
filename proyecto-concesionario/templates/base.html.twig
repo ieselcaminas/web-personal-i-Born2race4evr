@@ -92,7 +92,7 @@
     </style>
 </head>
 <body>
-{% if app.request.attributes.get('_route') != 'home' %}
+{% if app.request.attributes.get('_route') != 'app_login' and app.request.attributes.get('_route') != 'app_register' and app.request.attributes.get('_route') != 'home' %}
 <nav class="navbar navbar-expand navbar-dark navbar-animated">
     <div class="container">
         <a class="navbar-brand" href="/">Automoción</a>

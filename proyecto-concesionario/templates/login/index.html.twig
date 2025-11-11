@@ -1,45 +1,95 @@
 {% extends 'base.html.twig' %}
 {% block title %}Iniciar Sesión{% endblock %}
 {% block body %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h1 class="text-center mb-4">Iniciar Sesión</h1>
-
-                {% if error %}
-                    <div class="alert alert-danger">
-                        {{ error.messageKey|trans(error.messageData, 'security') }}
-                    </div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="alert alert-info">
-                        Ya has iniciado sesión como <strong>{{ app.user.userIdentifier }}</strong>.  
-                        <a href="{{ path('app_logout') }}" class="alert-link">Cerrar sesión</a>
-                    </div>
-                {% else %}
-                    <form method="post" action="{{ path('app_login') }}">
-                        <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Correo electrónico</label>
-                            <input type="email" value="{{ last_username }}" name="_username" id="inputEmail"
-                                   class="form-control" autocomplete="email" required autofocus>
+<body class="login-register-bg">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm card-hover">
+                <div class="card-body">
+                    <h1 class="text-center mb-4 gradient-title">Iniciar Sesión</h1>
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
                         </div>
-                        <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Contraseña</label>
-                            <input type="password" name="_password" id="inputPassword"
-                                   class="form-control" autocomplete="current-password" required>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="alert alert-info">
+                            Ya has iniciado sesión como <strong>{{ app.user.userIdentifier }}</strong>.  
+                            <a href="{{ path('app_logout') }}" class="alert-link">Cerrar sesión</a>
                         </div>
+                    {% else %}
+                        <form method="post" action="{{ path('app_login') }}">
+                            <div class="mb-3">
+                                <label for="inputEmail" class="form-label">Correo electrónico</label>
+                                <input type="email" value="{{ last_username }}" name="_username" id="inputEmail"
+                                    class="form-control" autocomplete="email" required autofocus>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">Contraseña</label>
+                                <input type="password" name="_password" id="inputPassword"
+                                    class="form-control" autocomplete="current-password" required>
+                            </div>
 
-                        <button class="btn btn-primary w-100" type="submit">Entrar</button>
-                    </form>
-                {% endif %}
+                            <button class="btn btn-primary w-100" type="submit">Entrar</button>
+                        </form>
+                    {% endif %}
 
-                <div class="mt-3 text-center">
-                    <small>¿No tienes cuenta? <a href="{{ path('app_register') }}">Regístrate aquí</a></small>
+                    <div class="mt-3 text-center">
+                        <small>¿No tienes cuenta? <a href="{{ path('app_register') }}">Regístrate aquí</a></small>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+<style>
+    .gradient-title {
+        background: linear-gradient(90deg, #007bff, #6610f2, #6f42c1);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientText 5s ease infinite;
+        font-weight: 700;
+    }
+
+    @keyframes gradientText {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .btn {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .card-hover {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    }
+
+    body.login-register-bg {
+    background: linear-gradient(135deg, #a8dadc, #f6bd60, #ffd6a5, #caffbf);        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+</style>
 {% endblock %}
