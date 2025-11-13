@@ -13,6 +13,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Nº de Coches</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,17 @@
                     <td>{{ marca.id }}</td>
                     <td>{{ marca.nombre }}</td>
                     <td>{{ marca.coches|length }}</td>
+                    <td class="text-center">
+                        <a href="{{ path('marca_edit', {id: marca.id}) }}" class="btn btn-outline-warning btn-sm me-1">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form method="post" action="{{ path('marca_delete', {id: marca.id}) }}" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta marca?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ marca.id) }}">
+                            <button class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

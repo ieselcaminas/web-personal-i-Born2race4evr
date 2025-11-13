@@ -21,7 +21,7 @@ class MarcaController extends AbstractController
             'marcas' => $marcaRepository->findAll(),
         ]);
     }
-    
+
     #[Route('/new', name: 'marca_new')]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -41,4 +41,43 @@ class MarcaController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/{id}/edit', name: 'marca_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Marca $marca, ManagerRegistry $doctrine): Response
+    {
+        $form = $this->createForm(MarcaType::class, $marca);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Marca actualizada correctamente.');
+
+            return $this->redirectToRoute('marca_index');
+        }
+
+        return $this->render('marca/edit.html.twig', [
+            'form' => $form->createView(),
+            'marca' => $marca,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'marca_delete', methods: ['POST'])]
+    public function delete(Request $request, Marca $marca, ManagerRegistry $doctrine): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $marca->getId(), $request->request->get('_token'))) {
+            $entityManager = $doctrine->getManager();
+            try {
+                $entityManager->remove($marca);
+                $entityManager->flush();
+                $this->addFlash('success', 'Marca eliminada correctamente.');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Error al eliminar la marca.');
+            }
+        }
+
+        return $this->redirectToRoute('marca_index');
+    }
+
 }
