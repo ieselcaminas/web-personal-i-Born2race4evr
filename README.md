@@ -2,7 +2,7 @@
 
 ## Descripción General
 
-Este proyecto es una aplicación web desarrollada con **Symfony** que implementa un sistema **CRUD completo (Crear, Leer, Actualizar y Eliminar)** para gestionar coches y marcas.  
+Este proyecto es una aplicación web desarrollada con **Symfony** que implementa un sistema **CRUD completo** para gestionar coches y marcas.  
 
 El objetivo es ofrecer una interfaz sencilla y moderna que permita:
 - Registrar nuevas marcas y coches.
@@ -21,7 +21,7 @@ Representa la marca de un coche (por ejemplo, Ford, Toyota, BMW...).
 
 | Campo | Tipo | Descripción |
 |-------|------|--------------|
-| id | int | Identificador único |
+| id | int | ID único |
 | nombre | string | Nombre de la marca |
 
 ---
@@ -31,7 +31,7 @@ Representa un coche perteneciente a una marca determinada.
 
 | Campo | Tipo | Descripción |
 |-------|------|--------------|
-| id | int | Identificador único |
+| id | int | ID único |
 | modelo | string | Nombre del modelo |
 | anio | int | Año de fabricación |
 | marca | relation | Relación con la entidad Marca |
@@ -43,8 +43,6 @@ Representa un coche perteneciente a una marca determinada.
 El proyecto incluye dos controladores:
 - `CocheController`
 - `MarcaController`
-
-Ambos siguen la misma estructura con rutas RESTful y métodos HTTP adecuados.
 
 ### **CocheController**
 
@@ -68,16 +66,16 @@ Ambos siguen la misma estructura con rutas RESTful y métodos HTTP adecuados.
 
 ## Formularios
 
-El proyecto utiliza **Symfony Forms** para generar y validar los formularios de creación y edición:
+El proyecto utiliza **los Forms de Symfony** para generar y validar los formularios de creación y edición:
 
 - `CocheType.php`
 - `MarcaType.php`
 
-Cada formulario incluye validaciones básicas y widgets estilizados con **Bootstrap 5** para mantener una interfaz limpia y profesional.
+Cada formulario incluye validaciones básicas y widgets estilizados con **Bootstrap 5** para mantener una interfaz limpia.
 
 ---
 
-## Interfaz de Usuario (Twig)
+## Interfaz de Usuario
 
 Las vistas están desarrolladas con **Twig**, usando plantillas reutilizables y estilos de **Bootstrap**.
 
@@ -88,15 +86,9 @@ Las vistas están desarrolladas con **Twig**, usando plantillas reutilizables y 
 - `coche/new.html.twig`, `coche/edit.html.twig`: Formularios para agregar o editar coches.
 - `marca/new.html.twig`, `marca/edit.html.twig`: Formularios para agregar o editar marcas.
 
-### **Elementos destacados**
-- Botones con iconos (`Bootstrap Icons`) para **editar** y **eliminar**.
-- Formularios protegidos con **CSRF tokens** para mayor seguridad.
-- Mensajes flash (`$this->addFlash()`) para mostrar confirmaciones y errores.
-- Estilo visual uniforme con tarjetas (`card`) y tablas (`table-hover`, `table-bordered`).
-
 ---
 
-## Flujo del CRUD
+## CRUD del Proyecto
 
 1. El usuario accede a `/coche` o `/marca` para ver la lista.
 2. Puede crear un nuevo elemento mediante el botón **“Nuevo”**.
@@ -107,12 +99,7 @@ Las vistas están desarrolladas con **Twig**, usando plantillas reutilizables y 
 
 ---
 
-## 💾 Base de Datos
+## Base de Datos
 
 El proyecto utiliza **Doctrine ORM** para gestionar la base de datos.
 
-Comandos útiles:
-```bash
-php bin/console doctrine:database:create
-php bin/console make:migration
-php bin/console doctrine:migrations:migrate
